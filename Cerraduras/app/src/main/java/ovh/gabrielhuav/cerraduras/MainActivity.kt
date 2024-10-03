@@ -3,45 +3,36 @@ package ovh.gabrielhuav.cerraduras
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import ovh.gabrielhuav.cerraduras.screens.LoginScreen
+import ovh.gabrielhuav.cerraduras.screens.DashboardScreen
 import ovh.gabrielhuav.cerraduras.ui.theme.CerradurasTheme
+import ovh.gabrielhuav.cerraduras.viewmodel.AuthViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             CerradurasTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MainApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MainApp(authViewModel: AuthViewModel = viewModel()) {
+    val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CerradurasTheme {
-        Greeting("Android")
+    Scaffold(modifier = Modifier.fillMaxSize()) {
+        if (isLoggedIn) {
+            DashboardScreen()
+        } else {
+            LoginScreen(authViewModel)
+        }
     }
 }
