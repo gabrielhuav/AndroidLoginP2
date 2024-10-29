@@ -8,10 +8,6 @@ import okhttp3.ResponseBody
 
 class AuthRepository {
 
-    suspend fun registerUser(user: User): Response<ResponseBody> {
-        return RetrofitClient.apiService.registerUser(user)
-    }
-
     suspend fun loginUser(credentials: LoginCredentials): Response<ResponseBody> {
         return RetrofitClient.apiService.login(credentials)
     }

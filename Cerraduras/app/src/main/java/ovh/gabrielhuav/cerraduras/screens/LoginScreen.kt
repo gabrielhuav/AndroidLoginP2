@@ -11,10 +11,18 @@ import ovh.gabrielhuav.cerraduras.models.LoginCredentials
 import ovh.gabrielhuav.cerraduras.viewmodel.AuthViewModel
 
 @Composable
-fun LoginScreen(authViewModel: AuthViewModel = viewModel()) {
+fun LoginScreen(authViewModel: AuthViewModel = viewModel(), onLoginSuccess: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
+
+    // Observa el estado de inicio de sesión
+    val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
+
+    // Si el usuario está autenticado, redirige al dashboard
+    if (isLoggedIn) {
+        onLoginSuccess()
+    }
 
     Column(
         modifier = Modifier

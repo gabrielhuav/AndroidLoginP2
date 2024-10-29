@@ -46,21 +46,5 @@ fun RegisterScreen(authViewModel: AuthViewModel = viewModel()) {
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-            val user = User(nombre, apellidoP, apellidoM, correo, username, password, 30, "Masculino", listOf(Role("ROLE_USER")))
-            authViewModel.registerUser(user, {
-                errorMessage = "Registro exitoso"
-            }, {
-                errorMessage = it
-            })
-        }, modifier = Modifier.fillMaxWidth()) {
-            Text("Registrar")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        if (errorMessage.isNotEmpty()) {
-            Text(errorMessage, color = MaterialTheme.colorScheme.error)
-        }
     }
 }
