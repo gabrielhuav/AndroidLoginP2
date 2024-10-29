@@ -61,6 +61,7 @@ dependencies {
 
     // Lifecycle ViewModel for Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
+    implementation(libs.androidx.appcompat)
 
     // Debugging tools
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.1")

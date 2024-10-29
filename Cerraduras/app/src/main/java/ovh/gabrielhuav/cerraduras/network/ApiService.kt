@@ -7,6 +7,6 @@ import retrofit2.http.POST
 import ovh.gabrielhuav.cerraduras.models.LoginCredentials
 
 interface ApiService {
-    @POST("/login")
+    @POST("api/auth/login")
     suspend fun login(@Body credentials: LoginCredentials): Response<ResponseBody>
 }
